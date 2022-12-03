@@ -1,7 +1,31 @@
 import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 import styles from "./home.module.scss";
 
 export default function Home() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    let tasks1: any = localStorage.getItem("tasks");
+    const tasks = tasks1 ? JSON.parse(tasks1.toString()) : [];
+    setTasks(tasks ? tasks : []);
+  }, []);
+
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    // @ts-ignore
+    tasks.push(inputRef.current.value);
+    console.table(tasks);
+    setTasks(tasks);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  };
+
+  const updateTasksContainer = () => {
+    getElement
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,29 +38,32 @@ export default function Home() {
         <h1 className={styles.title}>Todo App</h1>
         <p className={styles.description}>What are your tasks for today.</p>
 
-        {/* Here */}
-        <div className="form__group field">
-          <input
-            type="input"
-            className="form__field"
-            placeholder="Name"
-            name="name"
-            id="name"
-            required
-          />
-          <label typeof="name" className="form__label">
-            Name
-          </label>
+        <input type="text" ref={inputRef} />
+        <input id="task" type="submit" onClick={handleClick} />
+        <br />
+        <div id="tasksTable">
+          <h4>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
+            inventore similique dicta repudiandae totam deleniti pariatur?
+          </h4>
+          <h4>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
+            inventore similique dicta repudiandae totam deleniti pariatur?
+          </h4>
+          <h4>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
+            inventore similique dicta repudiandae totam deleniti pariatur?
+          </h4>
+          <h4>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
+            inventore similique dicta repudiandae totam deleniti pariatur?
+          </h4>
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Created With ❤️ by Loopers
+        <a href="https://loop.org.il" target="_blank" rel="noopener noreferrer">
+          <p> Created With {"<"}3 by Loopers </p>
         </a>
       </footer>
     </div>
