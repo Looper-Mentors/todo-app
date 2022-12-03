@@ -1,6 +1,8 @@
 import Head from "next/head";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./home.module.scss";
+import TasksList from "./tasksList";
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
@@ -16,14 +18,8 @@ export default function Home() {
   const handleClick = () => {
     // @ts-ignore
     tasks.push(inputRef.current.value);
-    console.table(tasks);
     setTasks(tasks);
-
     localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
-
-  const updateTasksContainer = () => {
-    getElement
   };
 
   return (
@@ -38,27 +34,13 @@ export default function Home() {
         <h1 className={styles.title}>Todo App</h1>
         <p className={styles.description}>What are your tasks for today.</p>
 
-        <input type="text" ref={inputRef} />
-        <input id="task" type="submit" onClick={handleClick} />
+        <form>
+          <input type="text" ref={inputRef} />
+          <input id="task" type="submit" onClick={handleClick} />
+        </form>
+
         <br />
-        <div id="tasksTable">
-          <h4>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
-            inventore similique dicta repudiandae totam deleniti pariatur?
-          </h4>
-          <h4>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
-            inventore similique dicta repudiandae totam deleniti pariatur?
-          </h4>
-          <h4>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
-            inventore similique dicta repudiandae totam deleniti pariatur?
-          </h4>
-          <h4>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse saepe
-            inventore similique dicta repudiandae totam deleniti pariatur?
-          </h4>
-        </div>
+        <div id="tasksTable">{TasksList(tasks)}</div>
       </main>
 
       <footer className={styles.footer}>
