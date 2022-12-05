@@ -1,16 +1,69 @@
-// https://codepen.io/lucasyem/pen/ZEEYKdj?editors=0100
-.container {
-  padding: 0 2rem;
-}
+// theme: https://codepen.io/webcrafterscz/pen/WLxzyQ
 
-.main {
-  min-height: 100vh;
+$background-color: #4f4789;
+
+.todoContainer {
   padding: 4rem 0;
   flex: 1;
+  min-height: 100vh;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.form {
+  position: relative;
+  width: 40%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.form input {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  padding-top: 20px;
+  border: none;
+  background-color: $background-color;
+}
+.form label {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid white;
+}
+.form label::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border-bottom: 3px solid #fce38a;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.form input:focus {
+  outline: none;
+}
+.form input:focus + .labelname .contentname,
+.form input:valid + .labelname .contentname {
+  transform: translateY(-150%);
+  font-size: 14px;
+  left: 0px;
+  color: #fce38a;
+}
+.form input:focus + .labelname::after,
+.form input:valid + .labelname::after {
+  transform: translateX(0%);
 }
 
 .footer {
@@ -27,6 +80,7 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  color: azure;
 }
 
 .title a {
@@ -63,14 +117,23 @@
   }
 }
 
-.tasksContainer {
+.container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+}
 
-  .task {
-    line-height: 1.5;
-    font-size: 1.5rem;
-  }
+.body {
+  flex-direction: column;
+  background-color: $background-color;
+  font-family: "montserrat", sans-serif;
+  font-weight: 500;
+  color: #fff;
+}
+
+.content-name {
+  position: absolute;
+  width: 50%;
+  bottom: 0px;
+  left: 0px;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
 }
