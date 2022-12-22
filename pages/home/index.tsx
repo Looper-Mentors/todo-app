@@ -30,20 +30,23 @@ export default function Home() {
 
 
   const handleClick = () => {
-    let tasks: any = JSON.parse(
-      // @ts-ignore
-      localStorage.getItem("tasks") ? localStorage.getItem("tasks") : []
-    );
+   
+    try{
+      let tasks: any = JSON.parse(
+        // @ts-ignore
+        localStorage.getItem("tasks") ? localStorage.getItem("tasks") : []
+      );
+     } catch (err) {
+       let tasks: any = [];
+       setTasks([]);
+     }
 
-    try {
-       // @ts-ignore
+    // @ts-ignore
     if (inputRef.current.value && !isFound(tasks, inputRef.current.value)) {
       // @ts-ignore
       tasks.push(inputRef.current.value);
     };
-    } catch (error) {
-      console.log(error);
-    }
+
 
     useEffect(() => {
       addEventListener("keypress", ({ key }: any) => {
