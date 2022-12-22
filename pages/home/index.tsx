@@ -27,24 +27,31 @@ export default function Home() {
     setTasks(tasks ? tasks : []);
   }, []);
 
-  useEffect(() => {
-    addEventListener("keypress", ({ key }: any) => {
-      if (key == "Enter") {
-        handleClick();
-      }
-    });
-  }, []);
+
 
   const handleClick = () => {
     let tasks: any = JSON.parse(
       // @ts-ignore
       localStorage.getItem("tasks") ? localStorage.getItem("tasks") : []
     );
-    // @ts-ignore
+
+    try {
+       // @ts-ignore
     if (inputRef.current.value && !isFound(tasks, inputRef.current.value)) {
       // @ts-ignore
       tasks.push(inputRef.current.value);
+    };
+    } catch (error) {
+      console.log(error);
     }
+
+    useEffect(() => {
+      addEventListener("keypress", ({ key }: any) => {
+        if (key == "Enter") {
+          handleClick();
+        }
+      });
+    }, []);
 
     setTasks(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
