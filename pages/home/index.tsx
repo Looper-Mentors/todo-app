@@ -25,36 +25,29 @@ export default function Home() {
     let tasks1: any = localStorage.getItem("tasks");
     const tasks = tasks1 ? JSON.parse(tasks1.toString()) : [];
     setTasks(tasks ? tasks : []);
+    addEventListener("keypress", ({ key }: any) => {
+      if (key == "Enter") {
+        handleClick();
+      }
+    });
   }, []);
 
-
-
   const handleClick = () => {
-   
-    try{
+    try {
       let tasks: any = JSON.parse(
         // @ts-ignore
         localStorage.getItem("tasks") ? localStorage.getItem("tasks") : []
       );
-     } catch (err) {
-       let tasks: any = [];
-       setTasks([]);
-     }
+    } catch (err) {
+      let tasks: any = [];
+      setTasks([]);
+    }
 
     // @ts-ignore
     if (inputRef.current.value && !isFound(tasks, inputRef.current.value)) {
       // @ts-ignore
       tasks.push(inputRef.current.value);
-    };
-
-
-    useEffect(() => {
-      addEventListener("keypress", ({ key }: any) => {
-        if (key == "Enter") {
-          handleClick();
-        }
-      });
-    }, []);
+    }
 
     setTasks(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
